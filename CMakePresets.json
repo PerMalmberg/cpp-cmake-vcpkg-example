@@ -1,0 +1,190 @@
+{
+	"version": 6,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 28
+	},
+	"include": [
+		"./CMakePresetsBase.json"
+	],
+	"configurePresets": [
+		{
+			"name": "project-base",
+			"hidden": true,
+			"cacheVariables": {
+				"SOME_VARIABLE": {
+					"type": "BOOL",
+					"value": "ON"
+				}
+			}
+		},
+		{
+			"name": "linux-static",
+			"inherits": [
+				"base-default",
+				"base-static",
+				"base-linux",
+				"project-base"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			}
+		},
+		{
+			"name": "linux-shared",
+			"inherits": [
+				"base-default",
+				"base-shared",
+				"base-linux",
+				"project-base"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			}
+		},
+		{
+			"name": "linux-static-dev",
+			"inherits": [
+				"base-default",
+				"base-static",
+				"base-linux",
+				"base-dev"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			}
+		},
+		{
+			"name": "linux-shared-dev",
+			"inherits": [
+				"base-default",
+				"base-shared",
+				"base-linux",
+				"base-dev"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			}
+		},
+		{
+			"name": "osx-static",
+			"inherits": [
+				"base-default",
+				"base-static",
+				"base-osx",
+				"project-base"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			}
+		},
+		{
+			"name": "osx-shared",
+			"inherits": [
+				"base-default",
+				"base-shared",
+				"base-osx",
+				"project-base"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			}
+		},
+		{
+			"name": "osx-static-dev",
+			"inherits": [
+				"base-default",
+				"base-static",
+				"base-osx",
+				"base-dev"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			}
+		},
+		{
+			"name": "osx-shared-dev",
+			"inherits": [
+				"base-default",
+				"base-shared",
+				"base-osx",
+				"base-dev"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			}
+		},
+		{
+			"name": "win-static",
+			"inherits": [
+				"base-default",
+				"base-static",
+				"base-win",
+				"project-base"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			}
+		},
+		{
+			"name": "win-shared",
+			"inherits": [
+				"base-default",
+				"base-shared",
+				"base-win",
+				"project-base"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			}
+		},
+		{
+			"name": "win-static-dev",
+			"inherits": [
+				"base-default",
+				"base-static",
+				"base-win",
+				"base-dev"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			}
+		},
+		{
+			"name": "win-shared-dev",
+			"inherits": [
+				"base-default",
+				"base-shared",
+				"base-win",
+				"base-dev"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			}
+		}
+	]
+}

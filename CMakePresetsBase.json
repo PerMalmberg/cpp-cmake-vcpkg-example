@@ -1,0 +1,136 @@
+{
+	"version": 6,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 28
+	},
+	"configurePresets": [
+		{
+			"name": "base-default",
+			"hidden": true,
+			"generator": "Ninja",
+			"binaryDir": "${sourceDir}/build",
+			"installDir": "${sourceDir}/../install/",
+			"cacheVariables": {
+				"CMAKE_EXPORT_COMPILE_COMMANDS": {
+					"type": "BOOL",
+					"value": "ON"
+				},
+				"CPACK_PACKAGE_DIRECTORY": {
+					"type": "PATH",
+					"value": "${sourceDir}/packages"
+				},
+				"CMAKE_TOOLCHAIN_FILE": {
+					"type": "PATH",
+					"value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+				}
+			}
+		},
+		{
+			"name": "base-win",
+			"hidden": true,
+			"description": "Base Windows",
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			},
+			"cacheVariables": {
+				"VCPKG_TARGET_TRIPLET": {
+					"type": "STRING",
+					"value": "x64-windows"
+				}
+			}
+		},
+		{
+			"name": "base-linux",
+			"hidden": true,
+			"description": "Base Linux",
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			},
+			"cacheVariables": {
+				"VCPKG_TARGET_TRIPLET": {
+					"type": "STRING",
+					"value": "x64-linux"
+				}
+			}
+		},
+		{
+			"name": "base-osx",
+			"hidden": true,
+			"description": "Base OSX",
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			},
+			"cacheVariables": {
+				"VCPKG_TARGET_TRIPLET": {
+					"type": "STRING",
+					"value": "x64-osx"
+				}
+			}
+		},
+		{
+			"name": "base-dev",
+			"hidden": true,
+			"description": "Base for dev/CI setup",
+			"cacheVariables": {
+				"CMAKE_CXX_CLANG_TIDY": {
+					"type": "STRING",
+					"value": "clang-tidy;--config-file=${sourceDir}/.clang-tidy"
+				},
+				"ADE_CLANG_FORMAT_GIT": {
+					"type": "STRING",
+					"value": "git;clang-format;--style=file:${sourceDir}/.clang-format"
+				},
+				"CMAKE_MESSAGE_LOG_LEVEL": {
+					"type": "STRING",
+					"value": "VERBOSE"
+				}
+			}
+		},
+		{
+			"name": "base-static",
+			"hidden": true,
+			"cacheVariables": {
+				"BUILD_SHARED_LIBS": {
+					"type": "BOOL",
+					"value": "OFF"
+				}
+			}
+		},
+		{
+			"name": "base-shared",
+			"hidden": true,
+			"cacheVariables": {
+				"BUILD_SHARED_LIBS": {
+					"type": "BOOL",
+					"value": "ON"
+				}
+			}
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "base-default",
+			"hidden": true,
+			"jobs": 10
+		}
+	],
+	"testPresets": [
+		{
+			"name": "base-default",
+			"hidden": true,
+			"execution": {
+				"jobs": 10
+			},
+			"output": {
+				"outputOnFailure": true
+			}
+		}
+	]
+}
