@@ -89,6 +89,20 @@
 			}
 		},
 		{
+			"name": "osx-static-arm",
+			"inherits": [
+				"base-default",
+				"base-static",
+				"base-osx-arm",
+				"project-base"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			}
+		},
+		{
 			"name": "osx-shared",
 			"inherits": [
 				"base-default",

@@ -75,6 +75,22 @@
 			}
 		},
 		{
+			"name": "base-osx-arm",
+			"hidden": true,
+			"description": "Base OSX ARM",
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			},
+			"cacheVariables": {
+				"VCPKG_TARGET_TRIPLET": {
+					"type": "STRING",
+					"value": "arm64-osx"
+				}
+			}
+		},
+		{
 			"name": "base-dev",
 			"hidden": true,
 			"description": "Base for dev/CI setup",
