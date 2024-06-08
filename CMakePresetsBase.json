@@ -9,8 +9,8 @@
 			"name": "base-default",
 			"hidden": true,
 			"generator": "Ninja",
-			"binaryDir": "${sourceDir}/build",
-			"installDir": "${sourceDir}/../install/",
+			"binaryDir": "${sourceDir}/build/",
+			"installDir": "${sourceDir}/install/",
 			"cacheVariables": {
 				"CMAKE_EXPORT_COMPILE_COMMANDS": {
 					"type": "BOOL",
@@ -23,6 +23,40 @@
 				"CMAKE_TOOLCHAIN_FILE": {
 					"type": "PATH",
 					"value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+				},
+				"VCPKG_OVERLAY_TRIPLETS": {
+					"type": "PATH",
+					"value": "${sourceDir}/vcpkg_triplets"
+				}
+			}
+		},
+		{
+			"name": "build-type-release",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": {
+					"type": "STRING",
+					"value": "Release"
+				}
+			}
+		},
+		{
+			"name": "build-type-debug",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": {
+					"type": "STRING",
+					"value": "Debug"
+				}
+			}
+		},
+		{
+			"name": "nix-compiler-options",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_CXX_FLAGS": {
+					"type": "STRING",
+					"value": "-Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -Wshadow -Wold-style-cast -Wunused -Werror"
 				}
 			}
 		},
@@ -38,7 +72,11 @@
 			"cacheVariables": {
 				"VCPKG_TARGET_TRIPLET": {
 					"type": "STRING",
-					"value": "x64-windows"
+					"value": "x64-windows-static"
+				},
+				"CMAKE_MSVC_RUNTIME_LIBRARY": {
+					"type": "STRING",
+					"value": "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 				}
 			}
 		},
@@ -51,12 +89,9 @@
 				"lhs": "${hostSystemName}",
 				"rhs": "Linux"
 			},
-			"cacheVariables": {
-				"VCPKG_TARGET_TRIPLET": {
-					"type": "STRING",
-					"value": "x64-linux"
-				}
-			}
+			"inherits": [
+				"nix-compiler-options"
+			]
 		},
 		{
 			"name": "base-osx",
@@ -67,26 +102,13 @@
 				"lhs": "${hostSystemName}",
 				"rhs": "Darwin"
 			},
+			"inherits": [
+				"nix-compiler-options"
+			],
 			"cacheVariables": {
 				"VCPKG_TARGET_TRIPLET": {
 					"type": "STRING",
 					"value": "x64-osx"
-				}
-			}
-		},
-		{
-			"name": "base-osx-arm",
-			"hidden": true,
-			"description": "Base OSX ARM",
-			"condition": {
-				"type": "equals",
-				"lhs": "${hostSystemName}",
-				"rhs": "Darwin"
-			},
-			"cacheVariables": {
-				"VCPKG_TARGET_TRIPLET": {
-					"type": "STRING",
-					"value": "arm64-osx"
 				}
 			}
 		},
@@ -99,33 +121,13 @@
 					"type": "STRING",
 					"value": "clang-tidy;--config-file=${sourceDir}/.clang-tidy"
 				},
-				"ADE_CLANG_FORMAT_GIT": {
-					"type": "STRING",
-					"value": "git;clang-format;--style=file:${sourceDir}/.clang-format"
-				},
 				"CMAKE_MESSAGE_LOG_LEVEL": {
 					"type": "STRING",
 					"value": "VERBOSE"
-				}
-			}
-		},
-		{
-			"name": "base-static",
-			"hidden": true,
-			"cacheVariables": {
-				"BUILD_SHARED_LIBS": {
-					"type": "BOOL",
-					"value": "OFF"
-				}
-			}
-		},
-		{
-			"name": "base-shared",
-			"hidden": true,
-			"cacheVariables": {
-				"BUILD_SHARED_LIBS": {
-					"type": "BOOL",
-					"value": "ON"
+				},
+				"CMAKE_BUILD_TYPE": {
+					"type": "STRING",
+					"value": "Debug"
 				}
 			}
 		}
