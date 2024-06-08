@@ -20,7 +20,7 @@
 					"type": "PATH",
 					"value": "${sourceDir}/packages"
 				},
-				"CMAKE_TOOLCHAIN_FILE": {
+				"DISABLED___CMAKE_TOOLCHAIN_FILE": {
 					"type": "PATH",
 					"value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
 				},

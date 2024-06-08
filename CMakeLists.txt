@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.29)
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 project(test)
 find_package(fmt CONFIG REQUIRED)
 add_executable(test main.cpp other.cpp)
